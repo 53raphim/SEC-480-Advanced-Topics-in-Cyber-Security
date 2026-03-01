@@ -32,3 +32,5 @@
 ### Module 3 - Week 5 & 6
 
 [Milestone 5 - 480 Utils](https://github.com/seraphimgerber/SEC-480-Advanced-Topics-in-Cyber-Security/wiki/Milestone-5-%E2%80%90-480%E2%80%90utils)
+
+[Milestone 6 ‐ Blue Network and VyOS Provisioning](https://github.com/seraphimgerber/SEC-480-Advanced-Topics-in-Cyber-Security/wiki/Milestone-6-%E2%80%90-Blue-Network-and-vyos-Provisioning)
