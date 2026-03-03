@@ -166,3 +166,67 @@ function Get-IP([string] $vmName) {
         Write-Host -ForegroundColor Red "No network adapter found on '$vmName'."
     }
 }
+
+function Start-MyVM([string] $vmName) {
+
+    do {
+        $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+        if (-not $vm) {
+            Write-Host -ForegroundColor Red "VM '$vmName' not found. Try again."
+            $vmName = Read-Host "Enter VM name"
+        }
+    } while (-not $vm)
+
+    if ($vm.PowerState -eq "PoweredOn") {
+        Write-Host -ForegroundColor Yellow "VM '$vmName' is already powered on."
+    } else {
+        Start-VM -VM $vm | Out-Null
+        Write-Host -ForegroundColor Green "VM '$vmName' has been powered on."
+    }
+}
+
+function Stop-MyVM([string] $vmName) {
+
+    do {
+        $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+        if (-not $vm) {
+            Write-Host -ForegroundColor Red "VM '$vmName' not found. Try again."
+            $vmName = Read-Host "Enter VM name"
+        }
+    } while (-not $vm)
+
+    if ($vm.PowerState -eq "PoweredOff") {
+        Write-Host -ForegroundColor Yellow "VM '$vmName' is already powered off."
+    } else {
+        Stop-VM -VM $vm -Confirm:$false | Out-Null
+        Write-Host -ForegroundColor Green "VM '$vmName' has been powered off."
+    }
+}
+
+function Set-Network([string] $vmName, [string] $network, [int] $adapterIndex = 0) {
+
+    do {
+        $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+        if (-not $vm) {
+            Write-Host -ForegroundColor Red "VM '$vmName' not found. Try again."
+            $vmName = Read-Host "Enter VM name"
+        }
+    } while (-not $vm)
+
+    do {
+        $net = Get-VirtualNetwork -Name $network -ErrorAction SilentlyContinue
+        if (-not $net) {
+            Write-Host -ForegroundColor Red "Network '$network' not found. Try again."
+            $network = Read-Host "Enter network name"
+        }
+    } while (-not $net)
+
+    $adapter = Get-NetworkAdapter -VM $vm | Select-Object -Index $adapterIndex
+    if (-not $adapter) {
+        Write-Host -ForegroundColor Red "No adapter found at index $adapterIndex on '$vmName'."
+        return
+    }
+
+    Set-NetworkAdapter -NetworkAdapter $adapter -NetworkName $network -Confirm:$false | Out-Null
+    Write-Host -ForegroundColor Green "Adapter $adapterIndex on '$vmName' set to '$network'."
+}
