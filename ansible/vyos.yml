@@ -1,0 +1,23 @@
+---
+- name: set up VyOS Blue Firewall
+  hosts: VyOS
+  vars_prompt:
+    - name: vyos_password
+      prompt: "Enter new VyOS password"
+      private: yes
+  tasks:
+    - name: password hashing
+      set_fact:
+        password_hash: "{{ vyos_password | password_hash('sha512') }}"
+    - name: load vyos config from template
+      become: yes
+      template:
+        src: config.boot.j2
+        dest: config.boot
+      vars:
+        hostname: "blue10-fw"
+        wan_ip: "10.0.17.200"
+        lan_ip: "10.0.5.2"
+        lan: "10.0.5.0/24"
+        gateway: "10.0.17.2"
+        name_server: "10.0.17.4"
