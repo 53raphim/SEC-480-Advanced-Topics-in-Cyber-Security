@@ -1,5 +1,6 @@
+---
 - name: rocky config
-  hosts: rocky
+  hosts: all
   tasks:
   - name: Create the .ssh directory
     file:

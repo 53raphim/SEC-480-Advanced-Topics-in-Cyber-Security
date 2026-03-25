@@ -13,7 +13,7 @@ all:
       hostname: rocky3
       lan_ip: 10.0.5.12
   vars:
-    ansible_user: champuser
+    ansible_user: root
     gateway: 10.0.5.2
     name_server: 10.0.5.5
     device: ens192
