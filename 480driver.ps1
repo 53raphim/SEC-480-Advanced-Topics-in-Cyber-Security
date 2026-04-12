@@ -29,7 +29,7 @@ if ($action -eq 'C') {
 
 } elseif ($action -eq 'I') {
     $targetVM = Read-Host "Enter VM name"
-    $ipAddr = Read-Host "IP Address [10.0.5.5]"
+    $ipAddr = Read-Host "IP Address"
     $mask = Read-Host "Subnet Mask [255.255.255.0]"
     if ([string]::IsNullOrWhiteSpace($mask)) { $mask = "255.255.255.0" }
     $gw = Read-Host "Gateway [10.0.5.2]"
