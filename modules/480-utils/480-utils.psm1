@@ -230,3 +230,22 @@ function Set-Network([string] $vmName, [string] $network, [int] $adapterIndex = 
     Set-NetworkAdapter -NetworkAdapter $adapter -NetworkName $network -Confirm:$false | Out-Null
     Write-Host -ForegroundColor Green "Adapter $adapterIndex on '$vmName' set to '$network'."
 }
+
+function Set-WindowsIP([string] $vmName, [string] $ip, [string] $subnet, [string] $gateway, [string] $dns, [string] $guestUser) {
+
+    do {
+        $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+        if (-not $vm) {
+            Write-Host -ForegroundColor Red "VM '$vmName' not found. Try again."
+            $vmName = Read-Host "Enter VM name"
+        }
+    } while (-not $vm)
+
+    $securePass = Read-Host "Enter guest password for '$vmName'" -AsSecureString
+    $plainPass = [System.Net.NetworkCredential]::new("", $securePass).Password
+
+    $script = "netsh interface ip set address name=`"Ethernet0`" static $ip $subnet $gateway`nnetsh interface ip set dns name=`"Ethernet0`" static $dns"
+
+    Invoke-VMScript -VM $vm -ScriptText $script -GuestUser $guestUser -GuestPassword $plainPass -ScriptType Bat
+    Write-Host -ForegroundColor Green "Static IP $ip set on '$vmName'."
+}
