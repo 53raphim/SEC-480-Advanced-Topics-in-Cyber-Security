@@ -43,3 +43,6 @@
 
 [Milestone 7 - Deploying and Post Provisioning of BlueX Linux Servers](https://github.com/seraphimgerber/SEC-480-Advanced-Topics-in-Cyber-Security/wiki/Milestone-7-%E2%80%90-Deploying-and-Post-Provisioning-of-BlueX-Linux-Servers)
 
+### Module 6 - Milestone 9
+
+[Milestone 9 - Blue1.local](https://github.com/53raphim/SEC-480-Advanced-Topics-in-Cyber-Security/wiki/Milestone-9-%E2%80%90-Blue1.local)
