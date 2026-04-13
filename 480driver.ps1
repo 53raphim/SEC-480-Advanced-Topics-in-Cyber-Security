@@ -34,8 +34,7 @@ if ($action -eq 'C') {
     if ([string]::IsNullOrWhiteSpace($mask)) { $mask = "255.255.255.0" }
     $gw = Read-Host "Gateway [10.0.5.2]"
     if ([string]::IsNullOrWhiteSpace($gw)) { $gw = "10.0.5.2" }
-    $dnsServer = Read-Host "DNS Server [10.0.5.5]"
-    if ([string]::IsNullOrWhiteSpace($dnsServer)) { $dnsServer = "10.0.5.5" }
+    $dnsServer = Read-Host "DNS Server"
     $guestUser = Read-Host "Guest username [Administrator]"
     if ([string]::IsNullOrWhiteSpace($guestUser)) { $guestUser = "Administrator" }
 
