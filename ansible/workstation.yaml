@@ -1,0 +1,18 @@
+---
+- name: Set up workstation
+  hosts: win-wks
+  gather_facts: false
+
+  tasks:
+    - name: Set static IP and DNS
+      win_shell: |
+        netsh interface ip set address "Ethernet0" static 10.0.5.50 255.255.255.0 10.0.5.2
+        netsh interface ip set dns "Ethernet0" static 10.0.5.5
+      async: 1
+      poll: 0
+      ignore_errors: yes
+
+    - name: Join domain
+      win_shell: |
+        Add-Computer -DomainName "BLUE1.local" -Credential (New-Object System.Management.Automation.PSCredential("BLUE1\Administrator", (ConvertTo-SecureString "Ch@mpl@ln!25" -AsPlainText -Force))) -Restart -Force
+      ignore_errors: yes
