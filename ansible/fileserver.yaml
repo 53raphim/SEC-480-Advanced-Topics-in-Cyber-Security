@@ -6,8 +6,9 @@
   tasks:
     - name: Set static IP and DNS
       win_shell: |
-        netsh interface ip set address "Ethernet0 2" static 10.0.5.215 255.255.255.0 10.0.5.2
-        netsh interface ip set dns "Ethernet0 2" static 10.0.5.5
+        netsh interface ip set address "Ethernet0" static 10.0.5.215 255.255.255.0 10.0.5.2
+        netsh interface ip set dns "Ethernet0" static 10.0.5.5
+      ignore_errors: yes
 
     - name: Set hostname
       win_hostname:
