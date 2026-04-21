@@ -1,6 +1,6 @@
 ---
 - name: Provision AD users and groups from planets.csv
-  hosts: windows
+  hosts: servers
   gather_facts: false
 
   vars:
@@ -11,7 +11,11 @@
     accounts_ou: "OU=Accounts,OU=BLUE1,DC=BLUE1,DC=LOCAL"
     groups_ou: "OU=Groups,OU=Accounts,OU=BLUE1,DC=BLUE1,DC=LOCAL"
 
-   tasks:
+  tasks:
+    - name: Create ansible directory on DC
+      win_file:
+        path: C:\ansible
+        state: directory
     - name: Ensure credentials directory exists outside repo
       win_file:
         path: C:\credentials
