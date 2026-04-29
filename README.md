@@ -44,3 +44,7 @@
 [Milestone 9 - Blue1.local](https://github.com/53raphim/SEC-480-Advanced-Topics-in-Cyber-Security/wiki/Milestone-9-%E2%80%90-Blue1.local)
 
 [Milestone 10 ‐ User and Service Provisioning](https://github.com/53raphim/SEC-480-Advanced-Topics-in-Cyber-Security/wiki/Milestone-10-%E2%80%90-User-and-Service-Provisioning)
+
+### Server Decommission
+
+[Server Decommissioning](https://github.com/53raphim/SYS-350-Enterprise-Virtualization/wiki/Milestone-9-%E2%80%90-Server-Decommission)
